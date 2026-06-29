@@ -4,7 +4,7 @@ return [
     'platform' => [
         'name' => 'RWA 2.0',
         'subtitle' => 'Multi-App-Portal mit MiData / Hitobito Login',
-        'base_url' => 'https://example.org/rwa_2.0',
+        'base_url' => 'https://rwa.chutze.ch',
         'login_headline' => 'Willkommen bei der RWA 2.0',
         'login_text' => 'Melde dich mit MiData / Hitobito an, um deine freigeschalteten Apps zu öffnen.',
         'login_button_label' => 'Mit MiData anmelden',
@@ -23,6 +23,7 @@ return [
         'roles_url' => null,
         'group_hierarchy_url_template' => 'https://db.scout.ch/groups/%d.json',
         'timeout' => 20,
+        'redirect_path' => '/auth/midata/index.php',
     ],
     'cache' => [
         'group_hierarchy_ttl' => 7 * 24 * 60 * 60,
