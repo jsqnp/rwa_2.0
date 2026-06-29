@@ -13,17 +13,38 @@ return [
     ],
     'debug' => false,
     'auth' => [
+        'environment' => 'test', // 'test' uses pbs.puzzle.ch, 'prod' uses db.scout.ch
         'provider_name' => 'MiData / Hitobito',
         'client_id' => 'your-client-id',
         'client_secret' => 'your-client-secret',
         'scope' => 'name email',
-        'authorize_url' => 'https://db.scout.ch/oauth/authorize',
-        'token_url' => 'https://db.scout.ch/oauth/token',
-        'profile_url' => 'https://db.scout.ch/oauth/profile',
+        'authorize_url' => 'https://pbs.puzzle.ch/oauth/authorize',
+        'token_url' => 'https://pbs.puzzle.ch/oauth/token',
+        'profile_url' => 'https://pbs.puzzle.ch/oauth/profile',
         'roles_url' => null,
-        'group_hierarchy_url_template' => 'https://db.scout.ch/groups/%d.json',
+        'group_hierarchy_url_template' => 'https://pbs.puzzle.ch/groups/%d.json',
         'timeout' => 20,
         'redirect_path' => '/auth/midata/index.php',
+        // Optional: set this explicitly if the OAuth provider has a strict callback registration.
+        // 'redirect_uri' => 'https://rwa.chutze.ch/auth/midata/index.php',
+        'providers' => [
+            'test' => [
+                'provider_name' => 'MiData Test',
+                'authorize_url' => 'https://pbs.puzzle.ch/oauth/authorize',
+                'token_url' => 'https://pbs.puzzle.ch/oauth/token',
+                'profile_url' => 'https://pbs.puzzle.ch/oauth/profile',
+                'roles_url' => null,
+                'group_hierarchy_url_template' => 'https://pbs.puzzle.ch/groups/%d.json',
+            ],
+            'prod' => [
+                'provider_name' => 'MiData Prod',
+                'authorize_url' => 'https://db.scout.ch/oauth/authorize',
+                'token_url' => 'https://db.scout.ch/oauth/token',
+                'profile_url' => 'https://db.scout.ch/oauth/profile',
+                'roles_url' => null,
+                'group_hierarchy_url_template' => 'https://db.scout.ch/groups/%d.json',
+            ],
+        ],
     ],
     'cache' => [
         'group_hierarchy_ttl' => 7 * 24 * 60 * 60,
