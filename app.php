@@ -119,7 +119,7 @@ function rwa_is_debug_enabled(): bool
     return (bool) rwa_config('debug', false);
 }
 
-function rwa_http_request(string $method, string $url, array $headers = [], array|string|null $bodyPayload = null, ?string $basicAuth = null, ?string $bearerToken = null, ?int $timeout = null, ?string $bodyFormat = 'json'): array
+function rwa_http_request(string $method, string $url, array $headers = [], array|string|null $bodyPayload = null, ?string $basicAuth = null, ?string $bearerToken = null, ?int $timeout = null, ?string $bodyFormat = null): array
 {
     $timeout ??= (int) rwa_config('auth.timeout', 20);
     $method = strtoupper($method);
@@ -209,7 +209,12 @@ function rwa_http_request(string $method, string $url, array $headers = [], arra
 
 function rwa_build_oauth_redirect_uri(): string
 {
-    return rwa_url('auth/midata/index.php');
+    $configured = trim((string) rwa_config('auth.redirect_uri', ''));
+    if ($configured !== '') {
+        return $configured;
+    }
+
+    return rwa_url('auth/midata');
 }
 
 function rwa_normalize_redirect_target(?string $target): string
